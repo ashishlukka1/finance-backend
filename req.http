@@ -1,0 +1,123 @@
+### DEMO SETUP
+
+@baseUrl = http://localhost:4000/api
+@bootstrapAdminToken = PASTE_EXISTING_ADMIN_TOKEN_HERE
+
+#############################################
+### CREATE DEMO USER
+#############################################
+
+### Register Demo User
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "User",
+  "email": "user@finance.com",
+  "password": "user1234567",
+  "confirmPassword": "user1234567"
+}
+
+###
+
+#############################################
+### CREATE DEMO ANALYST
+#############################################
+
+### Register Demo Analyst
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Analyst",
+  "email": "analyst@finance.com",
+  "password": "analyst123",
+  "confirmPassword": "analyst123"
+}
+
+###
+
+### Promote Demo Analyst To analyst
+PATCH {{baseUrl}}/users/PASTE_ANALYST_USER_ID_HERE/role
+Authorization: Bearer {{bootstrapAdminToken}}
+Content-Type: application/json
+
+{
+  "role": "analyst"
+}
+
+###
+
+#############################################
+### CREATE DEMO ADMIN
+#############################################
+
+### Register Demo Admin
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "Admin",
+  "email": "admin@finance.com",
+  "password": "admin123",
+  "confirmPassword": "admin123"
+}
+
+###
+
+### Promote Demo Admin To admin
+PATCH {{baseUrl}}/users/69d3b7bbb5946dd86a2e3cd8/role
+Authorization: Bearer {{bootstrapAdminToken}}
+Content-Type: application/json
+
+{
+  "role": "admin"
+}
+
+###
+
+#############################################
+### OPTIONAL LOGIN REQUESTS
+#############################################
+
+### Login Demo User
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo-user@example.com",
+  "password": "password123"
+}
+
+###
+
+### Login Demo Analyst
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo-analyst@example.com",
+  "password": "password123"
+}
+
+###
+
+### Login Demo Admin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "demo-admin@example.com",
+  "password": "password123"
+}
+
+###
+
+#############################################
+### ROLE FILES
+#############################################
+
+# Use these role-specific files after login:
+# - req.admin.http
+# - req.analyst.http
+# - req.user.http

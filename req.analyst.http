@@ -1,0 +1,78 @@
+### ANALYST REQUESTS
+
+@baseUrl = http://localhost:4000/api
+@analystToken = PASTE_REAL_ANALYST_TOKEN_HERE
+@userId = USER_ID_HERE
+@recordId = FINANCIAL_RECORD_ID_HERE
+
+### Health
+GET {{baseUrl}}/health
+
+###
+
+### Analyst Profile
+GET {{baseUrl}}/auth/profile
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Get Own User By Id
+GET {{baseUrl}}/users/{{userId}}
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Create Financial Record
+POST {{baseUrl}}/financial-records
+Authorization: Bearer {{analystToken}}
+Content-Type: application/json
+
+{
+  "amount": 875,
+  "type": "expense",
+  "category": "Software",
+  "date": "2026-04-06",
+  "notes": "License renewal",
+  "userId": "{{userId}}"
+}
+
+###
+
+### Get Financial Records
+GET {{baseUrl}}/financial-records
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Filter Financial Records
+GET {{baseUrl}}/financial-records?type=expense&category=Software&dateFrom=2026-01-01&dateTo=2026-12-31
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Get Financial Record By Id
+GET {{baseUrl}}/financial-records/{{recordId}}
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Update Financial Record
+PATCH {{baseUrl}}/financial-records/{{recordId}}
+Authorization: Bearer {{analystToken}}
+Content-Type: application/json
+
+{
+  "notes": "Updated by analyst"
+}
+
+###
+
+### Dashboard Summary
+GET {{baseUrl}}/dashboard/summary
+Authorization: Bearer {{analystToken}}
+
+###
+
+### Weekly Dashboard Trends
+GET {{baseUrl}}/dashboard/summary?dateFrom=2026-01-01&dateTo=2026-04-30&period=weekly
+Authorization: Bearer {{analystToken}}
